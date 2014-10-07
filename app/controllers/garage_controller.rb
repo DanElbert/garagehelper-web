@@ -10,6 +10,13 @@ class GarageController < ApplicationController
     @updates = GarageUpdate.order(created_at: :desc).limit(100)
   end
 
+  def summary
+    @summary = GarageUpdate.summarize
+    puts '---'
+    puts @summary
+    puts '---'
+  end
+
   # POST /garage/update
   def update
     if [:bigDoor, :backDoor, :basementDoor].all? { |d| params.has_key? d }

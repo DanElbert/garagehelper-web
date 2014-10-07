@@ -1,18 +1,16 @@
-<table>
+<table class="table">
   <tr>
     <th>Date</th>
-    <th>Time</th>
     <th>Big Door</th>
     <th>Back Door</th>
     <th>Basement Door</th>
   </tr>
   <% @updates.each do |u| %>
     <tr>
-      <td><%= u.created_at.strftime('%F') %></td>
-      <td><%= u.created_at.strftime('%T') %></td>
-      <td><%= u.big_door_open? %></td>
-      <td><%= u.back_door_open? %></td>
-      <td><%= u.basement_door_open? %></td>
+      <td><%= u.created_at.strftime('%F %T') %></td>
+      <td><%= door_status u.big_door_open? %></td>
+      <td><%= door_status u.back_door_open? %></td>
+      <td><%= door_status u.basement_door_open? %></td>
     </tr>
   <% end %>
 </table>

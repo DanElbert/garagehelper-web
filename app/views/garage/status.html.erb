@@ -1,15 +1,15 @@
 
 <ul class="list-group">
   <li class="list-group-item">
-    <span class="badge"><%= !!@status['bigDoor'] %></span>
+    <span class="badge"><%= door_status(@status['bigDoor']) %></span>
     Big Door
   </li>
   <li class="list-group-item">
-    <span class="badge"><%= !!@status['backDoor'] %></span>
+    <span class="badge"><%= door_status(@status['backDoor']) %></span>
     Back Door
   </li>
   <li class="list-group-item">
-    <span class="badge"><%= !!@status['basementDoor'] %></span>
+    <span class="badge"><%= door_status(@status['basementDoor']) %></span>
     Basement Door
   </li>
 </ul>
