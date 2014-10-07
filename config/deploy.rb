@@ -5,7 +5,7 @@ set :application, 'garagehelper'
 set :repo_url, 'git@github.com:DanElbert/garagehelper-web.git'
 
 set :rvm_type, :system
-set :rvm_ruby_version, '2.1.1'
+set :rvm_ruby_version, '2.1.0'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
