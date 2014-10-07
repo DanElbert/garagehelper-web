@@ -39,7 +39,7 @@ class GarageUpdate < ActiveRecord::Base
 
       prev = gu
     end
-    summary.compact
+    summary.compact.reverse
   end
 
 end

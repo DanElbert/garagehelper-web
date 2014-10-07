@@ -12,16 +12,26 @@
 <body>
 
 <nav class="navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <%= link_to "Garage Helper", root_path, class: 'navbar-brand' %>
-  </div>
-  <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Status", garage_status_path %></li>
-        <li><%= link_to "History", garage_history_path %></li>
-        <li><%= link_to "Summary", garage_summary_path %></li>
-        <li><%= link_to "Press Garage Button", garage_push_door_opener_path, method: :post %></li>
-      </ul>
+  <div class="container-fluid">
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav_command_list">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <%= link_to "Garage Helper", root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="collapse navbar-collapse" id="nav_command_list">
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Status", garage_status_path %></li>
+            <li><%= link_to "History", garage_history_path %></li>
+            <li><%= link_to "Summary", garage_summary_path %></li>
+            <li><%= link_to "Press Garage Button", garage_push_door_opener_path, method: :post, data: { confirm: "Are you sure you want to press the garage door button?" } %></li>
+          </ul>
+      </div>
   </div>
 </nav>
 
