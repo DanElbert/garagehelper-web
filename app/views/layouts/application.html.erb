@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><%= content_for(:title, 'Garage Helper') %></title>
+  <title><%= content_for?(:title) ? yield(:title) : 'Garage Helper' %></title>
 
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= csrf_meta_tags %>
@@ -20,17 +20,18 @@
         <li><%= link_to "Status", garage_status_path %></li>
         <li><%= link_to "History", garage_history_path %></li>
         <li><%= link_to "Summary", garage_summary_path %></li>
-        <li><%= link_to "Press Garage Button", "#" %></li>
+        <li><%= link_to "Press Garage Button", garage_push_door_opener_path, method: :post %></li>
       </ul>
   </div>
 </nav>
 
-
+<%= render partial: 'layouts/flash' %>
 
 <div class="container">
   <%= yield %>
 </div>
 
 <%= javascript_include_tag 'application' %>
+<%= yield :javascript %>
 </body>
 </html>

@@ -12,9 +12,12 @@ class GarageController < ApplicationController
 
   def summary
     @summary = GarageUpdate.summarize
-    puts '---'
-    puts @summary
-    puts '---'
+  end
+
+  def push_door_opener
+    GarageApi.push_garage_door
+    flash[:notice] = "Button pushed"
+    redirect_to garage_status_path
   end
 
   # POST /garage/update
