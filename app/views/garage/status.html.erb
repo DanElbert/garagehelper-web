@@ -1,15 +1,15 @@
 
-<table>
-  <tr>
-    <td>Big Door</td>
-    <td><%= !!@status['bigDoor'] %></td>
-  </tr>
-  <tr>
-    <td>Back Door</td>
-    <td><%= !!@status['backDoor'] %></td>
-  </tr>
-  <tr>
-    <td>Basement Door</td>
-    <td><%= !!@status['basementDoor'] %></td>
-  </tr>
-</table>
+<ul class="list-group">
+  <li class="list-group-item">
+    <span class="badge"><%= !!@status['bigDoor'] %></span>
+    Big Door
+  </li>
+  <li class="list-group-item">
+    <span class="badge"><%= !!@status['backDoor'] %></span>
+    Back Door
+  </li>
+  <li class="list-group-item">
+    <span class="badge"><%= !!@status['basementDoor'] %></span>
+    Basement Door
+  </li>
+</ul>
