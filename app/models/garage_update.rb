@@ -9,12 +9,16 @@ class GarageUpdate < ActiveRecord::Base
     [:basement_door_open?, :big_door_open?, :back_door_open?].each do |door|
       case
         when self.send(door) && !previous_update.send(door)
-          add_txt(txt, "[#{self.created_at.strftime('%y-%m-%d %T')}] the #{door.to_s.sub('_open?', '').humanize} opened")
+          add_txt(txt, "the #{door.to_s.sub('_open?', '').humanize} opened")
         when !self.send(door) && previous_update.send(door)
-          add_txt(txt, "[#{self.created_at.strftime('%y-%m-%d %T')}] the #{door.to_s.sub('_open?', '').humanize} closed")
+          add_txt(txt, "the #{door.to_s.sub('_open?', '').humanize} closed")
       end
     end
-    txt
+    if txt.present?
+      {date: self.created_at, summary: txt }
+    else
+      nil
+    end
   end
 
   def add_txt(base, txt)
@@ -29,15 +33,13 @@ class GarageUpdate < ActiveRecord::Base
     summary = []
     prev = nil
     self.history.to_a.reverse.each do |gu|
-      puts "#{prev} #{gu}"
       unless prev.nil?
-        puts gu.describe(prev)
         summary << gu.describe(prev)
       end
 
       prev = gu
     end
-    summary
+    summary.compact
   end
 
 end

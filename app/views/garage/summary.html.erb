@@ -1,10 +1,12 @@
-<table>
+<table class="table table-condensed">
   <tr>
+    <th>Date</th>
     <th>Event</th>
   </tr>
   <% @summary.each do |s| %>
     <tr>
-      <td><%= s %></td>
+      <td><%= s[:date].strftime('%F %T') %></td>
+      <td><%= s[:summary]%></td>
     </tr>
   <% end %>
 </table>
