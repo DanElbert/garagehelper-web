@@ -12,6 +12,8 @@ gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
+gem 'thin'
+
 gem 'httparty', '~> 0.13.1'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
