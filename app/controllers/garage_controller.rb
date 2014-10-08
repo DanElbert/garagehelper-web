@@ -5,11 +5,17 @@ class GarageController < ApplicationController
   before_action :only_allow_helper, only: [:update, :keepalive]
 
   def status
-    @status = GarageApi.status
+    begin
+      @status = GarageApi.status
+    rescue
+      update = GarageUpdate.history.first
+      flash[:notice] = "Unable to contact Garage Helper.  Displaying last known status as of #{update.created_at}"
+      @status = { 'bigDoor' => update.big_door_open?, 'backDoor' => update.back_door_open?, 'basementDoor' => update.basement_door_open? }
+    end
   end
 
   def history
-    @updates = GarageUpdate.order(created_at: :desc).limit(100)
+    @updates = GarageUpdate.history
   end
 
   def summary

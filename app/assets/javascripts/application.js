@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require_tree .
+
+
+$(document).ready(function() {
+  $(document).on("click", "[data-reload-link]", function(e) {
+    document.location.reload(true);
+    return false;
+  });
+});
