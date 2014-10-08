@@ -41,7 +41,7 @@ class GarageController < ApplicationController
   protected
 
   def only_allow_helper
-    #render nothing: true, status: 401 unless request.remote_ip == '10.0.0.105'
+    render nothing: true, status: 401 unless request.env['HTTP_X_FORWARDED_FOR'] == '10.0.0.105'
   end
 
 end
