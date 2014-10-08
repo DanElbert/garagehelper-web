@@ -2,6 +2,8 @@ class GarageController < ApplicationController
 
   protect_from_forgery :except => [:update]
 
+  before_action :only_allow_helper, only: [:update, :keepalive]
+
   def status
     @status = GarageApi.status
   end
@@ -20,7 +22,7 @@ class GarageController < ApplicationController
     redirect_to garage_status_path
   end
 
-  # POST /garage/update
+  # POST /garage/helper/update
   def update
     if [:bigDoor, :backDoor, :basementDoor].all? { |d| params.has_key? d }
       GarageUpdate.create!(big_door_open: params[:bigDoor], back_door_open: params[:backDoor], basement_door_open: params[:basementDoor])
@@ -28,6 +30,18 @@ class GarageController < ApplicationController
     else
       raise "Missing params"
     end
+  end
+
+  # GET /garage/helper/keepalive
+  def keepalive
+    Rails.logger.fatal "Remote: #{request.remote_ip}; x forwarded header: #{request.env["HTTP_X_FORWARDED_FOR"]}"
+    render nothing:true, status: 204
+  end
+
+  protected
+
+  def only_allow_helper
+    #render nothing: true, status: 401 unless request.remote_ip == '10.0.0.105'
   end
 
 end

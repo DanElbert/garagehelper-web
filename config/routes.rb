@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
 
 
-  post 'garage/update' => 'garage#update', as: :garage_update
-  get 'garage/status' => 'garage#status', as: :garage_status
-  get 'garage/history' => 'garage#history', as: :garage_history
-  get 'garage/summary' => 'garage#summary', as: :garage_summary
-  post 'garage/push_door_opener' => 'garage#push_door_opener', as: :garage_push_door_opener
+  scope path: 'garage', controller: 'garage', as: 'garage' do
+    get 'status'
+    get 'history'
+    get 'summary'
+    post 'push_door_opener'
+
+    scope path: 'helper' do
+      post 'update'
+      get 'keepalive'
+    end
+  end
+
+  post 'garage/update' => 'garage#update'
 
   root to: 'garage#status'
 
