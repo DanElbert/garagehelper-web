@@ -34,7 +34,7 @@ class GarageController < ApplicationController
 
   # GET /garage/helper/keepalive
   def keepalive
-    Rails.logger.fatal "Remote: #{request.remote_ip}; x forwarded header: #{request.env["HTTP_X_FORWARDED_FOR"]}"
+    #Rails.logger.fatal "Remote: #{request.remote_ip}; x forwarded header: #{request.env["HTTP_X_FORWARDED_FOR"]}"
     render nothing:true, status: 204
   end
 
