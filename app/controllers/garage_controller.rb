@@ -50,8 +50,8 @@ class GarageController < ApplicationController
   protected
 
   def only_allow_helper
-    unless request.env['HTTP_X_FORWARDED_FOR'] == '10.0.0.105'
-      Rails.logger.info "Rejected request from #{request.env['HTTP_X_FORWARDED_FOR']}"
+    unless request.env['X-Real-IP'] == '10.0.0.105'
+      Rails.logger.info "Rejected request from #{request.env['X-Real-IP']}"
       render nothing: true, status: 401
     end
   end
