@@ -13,8 +13,13 @@ class GarageController < ApplicationController
       @status = GarageApi.status
     rescue
       update = GarageUpdate.history.first
-      flash[:notice] = "Unable to contact Garage Helper.  Displaying last known status as of #{update.created_at}"
-      @status = { 'bigDoor' => update.big_door_open?, 'backDoor' => update.back_door_open?, 'basementDoor' => update.basement_door_open? }
+      if update
+        flash[:error] = "Unable to contact Garage Helper.  Displaying last known status as of #{update.created_at}"
+        @status = { 'bigDoor' => update.big_door_open?, 'backDoor' => update.back_door_open?, 'basementDoor' => update.basement_door_open? }
+      else
+        flash[:error] = "Unable to contact Garage Helper and no previous updates found"
+        @status = {}
+      end
     end
   end
 
@@ -27,9 +32,13 @@ class GarageController < ApplicationController
   end
 
   def push_door_opener
-    GarageApi.push_garage_door
-    flash[:notice] = "Button pushed"
-    redirect_to garage_status_path
+    begin
+      GarageApi.push_garage_door
+      flash[:notice] = "Button pushed"
+    rescue
+      flash[:error] = "Unable to contact Garage Helper"
+    end
+    redirect_to :back
   end
 
   # POST /garage/helper/update
