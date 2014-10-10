@@ -2,6 +2,10 @@ class GarageController < ApplicationController
 
   protect_from_forgery :except => [:update]
 
+  if ENV["GARAGE_HELPER_PASSWORD"]
+    http_basic_authenticate_with name: "dan", password: ENV["GARAGE_HELPER_PASSWORD"], except: [:update, :keepalive]
+  end
+
   before_action :only_allow_helper, only: [:update, :keepalive]
 
   def status
@@ -40,14 +44,16 @@ class GarageController < ApplicationController
 
   # GET /garage/helper/keepalive
   def keepalive
-    #Rails.logger.fatal "Remote: #{request.remote_ip}; x forwarded header: #{request.env["HTTP_X_FORWARDED_FOR"]}"
     render nothing:true, status: 204
   end
 
   protected
 
   def only_allow_helper
-    render nothing: true, status: 401 unless request.env['HTTP_X_FORWARDED_FOR'] == '10.0.0.105'
+    unless request.env['HTTP_X_FORWARDED_FOR'] == '10.0.0.105'
+      Rails.logger.info "Rejected request from #{request.env['HTTP_X_FORWARDED_FOR']}"
+      render nothing: true, status: 401
+    end
   end
 
 end
