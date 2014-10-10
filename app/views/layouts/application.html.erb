@@ -26,19 +26,18 @@
       </div>
       <div class="collapse navbar-collapse" id="nav_command_list">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Status", garage_status_path %></li>
-            <li><%= link_to "History", garage_history_path %></li>
-            <li><%= link_to "Summary", garage_summary_path %></li>
-            <li><%= link_to "Reload", "#", data: { reload_link: true } %></li>
-            <li><%= link_to "Press Garage Button", garage_push_door_opener_path, method: :post, data: { confirm: "Are you sure you want to press the garage door button?" } %></li>
+            <li><%= link_to "Status", garage_status_path, class: 'btn btn-default' %></li>
+            <li><%= link_to "History", garage_history_path, class: 'btn btn-default' %></li>
+            <li><%= link_to "Summary", garage_summary_path, class: 'btn btn-default' %></li>
+            <li><%= link_to "Reload", "#", data: { reload_link: true }, class: 'btn btn-default' %></li>
+            <li><%= link_to "Press Garage Button", garage_push_door_opener_path, method: :post, class: 'btn btn-default', data: { confirm: "Are you sure you want to press the garage door button?" } %></li>
           </ul>
       </div>
   </div>
 </nav>
 
-<%= render partial: 'layouts/flash' %>
-
 <div class="container">
+  <%= render partial: 'layouts/flash' %>
   <%= yield %>
 </div>
 
