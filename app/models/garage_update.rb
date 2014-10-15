@@ -1,6 +1,6 @@
 class GarageUpdate < ActiveRecord::Base
 
-  scope :history, -> { where(is_changed: true).order(created_at: :desc).limit(100) }
+  scope :history, -> { where(is_change: true).order(created_at: :desc).limit(100) }
 
   # Returns a string describing what this event did, based on the state in the previous_update
   # Method assumes previous_update occurred earlier in time than this instance (and immediately before)
