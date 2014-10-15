@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141006231557) do
+ActiveRecord::Schema.define(version: 20141015183414) do
 
   create_table "garage_updates", force: true do |t|
     t.boolean  "big_door_open"
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20141006231557) do
     t.boolean  "basement_door_open"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_change"
   end
 
-  add_index "garage_updates", ["created_at"], name: "index_garage_updates_on_created_at"
+  add_index "garage_updates", ["created_at", "is_change"], name: "index_garage_updates_on_created_at_and_is_change"
 
 end

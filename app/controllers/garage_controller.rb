@@ -44,7 +44,10 @@ class GarageController < ApplicationController
   # POST /garage/helper/update
   def update
     if [:bigDoor, :backDoor, :basementDoor].all? { |d| params.has_key? d }
-      GarageUpdate.create!(big_door_open: params[:bigDoor], back_door_open: params[:backDoor], basement_door_open: params[:basementDoor])
+      previous = GarageUpdate.history.first
+      update = GarageUpdate.new(big_door_open: params[:bigDoor], back_door_open: params[:backDoor], basement_door_open: params[:basementDoor])
+      update.is_change = update.different?(previous)
+      update.save!
       render nothing: true, status: 204
     else
       raise "Missing params"

@@ -1,6 +1,6 @@
 class GarageUpdate < ActiveRecord::Base
 
-  scope :history, -> { order(created_at: :desc).limit(100) }
+  scope :history, -> { where(is_changed: true).order(created_at: :desc).limit(100) }
 
   # Returns a string describing what this event did, based on the state in the previous_update
   # Method assumes previous_update occurred earlier in time than this instance (and immediately before)
@@ -26,6 +26,17 @@ class GarageUpdate < ActiveRecord::Base
       base << txt
     else
       base << ' and ' << txt
+    end
+  end
+
+  # returns true if other is nil or any of the door states are different between this instance and other
+  def different?(other)
+    if other
+      ![:basement_door_open?, :big_door_open?, :back_door_open?].all? do |door|
+        !!self.send(door) == !!other.send(door)
+      end
+    else
+      true
     end
   end
 
