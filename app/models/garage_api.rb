@@ -17,7 +17,7 @@ class GarageApi
   def self.connection
     Faraday.new('http://garagehelper.thenever/') do |faraday|
       faraday.request :json
-      faraday.adapter :em_http
+      faraday.adapter :em_synchrony
     end
   end
 end
