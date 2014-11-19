@@ -1,13 +1,23 @@
 class GarageApi
-  include HTTParty
-  base_uri 'http://garagehelper.thenever/'
-  format :json
 
   def self.status
-    get('/status').parsed_response
+    res = connection.get('/status')
+    if res.body.present?
+      res.body
+    else
+      {}
+    end
   end
 
   def self.push_garage_door
-    post('/pushGarageOpener').code == 204
+    res = connection.post('/pushGarageOpener')
+    res.status.to_i == 204
+  end
+
+  def self.connection
+    Faraday.new('http://garagehelper.thenever/') do |faraday|
+      faraday.request :json
+      faraday.adapter :em_http
+    end
   end
 end

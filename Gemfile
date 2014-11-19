@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2', '~> 0.3.16'
@@ -14,8 +14,12 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'thin'
 
-gem 'httparty', '~> 0.13.1'
+gem 'faraday', '~> 0.9.0'
+gem 'faraday_middleware', '~> 0.9.1'
+gem 'em-http-request', '~> 1.1.2'
 gem 'jbuilder'
+gem 'oj', '~> 2.11.1'
+gem 'oj_mimic_json', '~> 1.0.1'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer',  platforms: :ruby
