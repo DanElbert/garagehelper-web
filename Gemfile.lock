@@ -94,6 +94,7 @@ GEM
     oj (2.11.1)
     oj_mimic_json (1.0.1)
     rack (1.5.2)
+    rack-fiber_pool (0.9.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.8)
@@ -182,6 +183,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.16)
   oj (~> 2.11.1)
   oj_mimic_json (~> 1.0.1)
+  rack-fiber_pool
   rails (= 4.1.8)
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)
