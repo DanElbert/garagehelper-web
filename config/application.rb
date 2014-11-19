@@ -21,7 +21,7 @@ module GaragehelperWeb
     # config.i18n.default_locale = :de
 
     require 'rack/fiber_pool'
-    config.middleware.insert_before Rack::Lock, Rack::FiberPool
+    config.middleware.insert_before Rack::Sendfile, Rack::FiberPool
     #config.threadsafe!
     # Rails::Initializer.run do |config|
     #
