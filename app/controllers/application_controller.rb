@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def authenticate
     if ENV["GARAGE_HELPER_PASSWORD"]
       authenticate_or_request_with_http_basic do |u, p|
-        u == 'dan' && (p == ENV["GARAGE_HELPER_PASSWORD"] || is_rlyeh_request)
+        u == 'dan' && (p == ENV["GARAGE_HELPER_PASSWORD"] || is_local_request?)
       end
     else
       true
@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_rlyeh_request
-    request_ip_addresses.include?('10.0.0.50')
+  def is_local_request?
+    request_ip_addresses.any? { |ip| ip.start_with? '10.0.0.' }
   end
 
   def request_ip_addresses
