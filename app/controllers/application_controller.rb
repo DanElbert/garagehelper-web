@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_local_request?
-    request_ip_addresses.any? { |ip| ip.start_with? '10.0.0.' }
+    request_ip_addresses.any? { |ip| ip.start_with?('10.0.0.') || ip.start_with?('172.17.') }
   end
 
   def request_ip_addresses
