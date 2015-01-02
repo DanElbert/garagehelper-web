@@ -42,7 +42,7 @@ class GarageUpdate < ActiveRecord::Base
 
   # returns true if other is nil or any of the door states are different between this instance and other
   def different?(other)
-    !!differences(other).empty?
+    !differences(other).empty?
   end
 
   def self.summarize
