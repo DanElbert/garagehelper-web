@@ -1,6 +1,6 @@
 class GarageController < ApplicationController
 
-  protect_from_forgery :except => [:update]
+  protect_from_forgery :except => [:update, :push_door_opener]
 
   if ENV["GARAGE_HELPER_PASSWORD"]
     http_basic_authenticate_with name: "dan", password: ENV["GARAGE_HELPER_PASSWORD"], except: [:update, :keepalive]
