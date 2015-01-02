@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def is_rlyeh_request
-    Rails.logger.info "Checking <<#{request_ip_addresses}>>"
     request_ip_addresses.include?('10.0.0.50')
   end
 
