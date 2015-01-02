@@ -13,8 +13,6 @@ class AutomationApi
   end
 
   def self.connection
-    store = OpenSSL::X509::Store.new
-    store.set_default_paths
     Faraday.new('https://automation.elbert.us/', ssl: { verify: false }) do |faraday|
       faraday.basic_auth('garage', ENV['OPENHAB_PASSWORD'])
       faraday.adapter :em_synchrony
