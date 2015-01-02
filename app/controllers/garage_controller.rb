@@ -3,7 +3,7 @@ class GarageController < ApplicationController
   protect_from_forgery :except => [:update, :push_door_opener]
 
   before_filter :authenticate, except: [:update, :keepalive]
-
+  before_filter :authenticate_except_json, only: [:status]
   before_filter :only_allow_helper, only: [:update, :keepalive]
 
   def status

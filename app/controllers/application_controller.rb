@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def authenticate_except_json
+    if request.format == Mime::JSON
+      true
+    else
+      authenticate
+    end
+  end
+
   def authenticate
     if ENV["GARAGE_HELPER_PASSWORD"]
       authenticate_or_request_with_http_basic do |u, p|
