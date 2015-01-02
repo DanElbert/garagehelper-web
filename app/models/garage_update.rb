@@ -29,15 +29,20 @@ class GarageUpdate < ActiveRecord::Base
     end
   end
 
+  def differences(other)
+    list = []
+    if other
+      [:basement_door_open?, :big_door_open?, :back_door_open?].each do |door|
+        list << door if !!self.send(door) != !!other.send(door)
+      end
+    end
+
+    list
+  end
+
   # returns true if other is nil or any of the door states are different between this instance and other
   def different?(other)
-    if other
-      ![:basement_door_open?, :big_door_open?, :back_door_open?].all? do |door|
-        !!self.send(door) == !!other.send(door)
-      end
-    else
-      true
-    end
+    !!differences(other).empty?
   end
 
   def self.summarize

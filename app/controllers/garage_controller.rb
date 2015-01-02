@@ -48,6 +48,13 @@ class GarageController < ApplicationController
       update = GarageUpdate.new(big_door_open: params[:bigDoor], back_door_open: params[:backDoor], basement_door_open: params[:basementDoor])
       update.is_change = update.different?(previous)
       update.save!
+
+      if update.is_change?
+        update.differences(previous).each do |door|
+          AutomationApi.set_door_state(door, update.send(door))
+        end
+      end
+
       render nothing: true, status: 204
     else
       raise "Missing params"
