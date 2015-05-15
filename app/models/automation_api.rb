@@ -10,7 +10,7 @@ class AutomationApi
     raise "Invalid door: [#{door_name}]" unless DOOR_NAME_LOOKUPS.has_key? door_name
     res = connection.put("/rest/items/#{DOOR_NAME_LOOKUPS[door_name]}/state", is_open ? 'OPEN' : 'CLOSED')
     unless res.success?
-      Rails.logger.warn("Attempt to update Automation failed:\n#{res}")
+      Rails.logger.warn("Attempt to update Automation failed:\n#{res.status}: #{res.headers.inspect}")
     end
     res.success?
   end
