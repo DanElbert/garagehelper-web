@@ -20,11 +20,20 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+docker:
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  host: mysql
+  username: garagehelper
+  password: password
+  database: garagehelper
+
 production:
   adapter: mysql2
   pool: 5
   timeout: 5000
-  host: rlyeh.thenever
-  username: garagehelper
-  password: grape45phrute$42
-  database: garagehelper
+  host: <%= ENV['GARAGE_DB_HOST'] || 'mysql' %>
+  username: <%= ENV['GARAGE_DB_USER'] || 'garage_user' %>
+  password: <%= ENV['GARAGE_DB_PASSWORD'] || 'garage_password' %>
+  database: <%= ENV['GARAGE_DB_NAME'] || 'garagehelper' %>

@@ -1,0 +1,9 @@
+web:
+  image: danelbert/garagehelper:latest
+  ports:
+    - "5000:80"
+  environment:
+    - PASSENGER_APP_ENV=production
+  env_file: /etc/default/garagehelper
+  volumes:
+    - /var/log/garagehelper/:/home/app/garagehelper/log

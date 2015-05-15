@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+def file_path(path_from_rails_root)
+  File.expand_path(File.dirname(__FILE__) + "/../#{path_from_rails_root}")
+end
+
+unless system('docker inspect garagehelper_db_data')
+  puts 'Creating data container...'
+  `docker create -v /var/lib/mysql -v /data --name garagehelper_db_data mysql:5.6`
+
+  Dir.chdir(file_path('.')) do
+    bash_cmd = 'sleep 10 && rake db:create db:migrate db:seed'
+    `docker-compose run web bash -c "#{bash_cmd}"`
+    `docker-compose stop`
+    `docker-compose rm --force`
+  end
+end

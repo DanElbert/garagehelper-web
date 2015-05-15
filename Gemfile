@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.1.10'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2', '~> 0.3.16'
@@ -12,13 +12,8 @@ gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-gem 'thin'
-
 gem 'faraday', '~> 0.9.0'
 gem 'faraday_middleware', '~> 0.9.1'
-gem 'em-http-request', '~> 1.1.2'
-gem 'em-synchrony', '~> 1.0.3'
-gem 'rack-fiber_pool'
 gem 'jbuilder'
 gem 'oj', '~> 2.11.1'
 gem 'oj_mimic_json', '~> 1.0.1'

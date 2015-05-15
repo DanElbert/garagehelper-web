@@ -15,7 +15,7 @@ class AutomationApi
   def self.connection
     Faraday.new('https://automation.elbert.us/', ssl: { verify: false }) do |faraday|
       faraday.basic_auth('garage', ENV['OPENHAB_PASSWORD'])
-      faraday.adapter :em_synchrony
+      faraday.adapter Faraday.default_adapter
     end
   end
 end

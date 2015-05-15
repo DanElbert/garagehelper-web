@@ -1,0 +1,5 @@
+.git/
+logs/
+db/*.sqlite*
+tmp/
+public/assets
