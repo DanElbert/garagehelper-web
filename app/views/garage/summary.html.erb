@@ -3,10 +3,15 @@
     <th>Date</th>
     <th>Event</th>
   </tr>
-  <% @summary.each do |s| %>
+  <% @summary.group_by { |s| s[:date].strftime("%F")}.each do |d, summaries| %>
     <tr>
-      <td><%= s[:date].strftime('%F %T') %></td>
-      <td><%= s[:summary]%></td>
+      <td colspan="2"><%= d %></td>
     </tr>
+    <% summaries.each do |s| %>
+      <tr>
+        <td><%= s[:date].strftime('%T') %></td>
+        <td><%= s[:summary]%></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
