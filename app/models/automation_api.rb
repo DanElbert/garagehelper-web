@@ -11,7 +11,7 @@ class AutomationApi
 
     begin
       MQTT::Client.connect("mqtts://#{ENV['MQTT_USER']}:#{ENV['MQTT_PASSWORD']}@mqtt.elbert.us") do |c|
-        c.publish("garage/door/#{DOOR_NAME_LOOKUPS[door_name]}}", is_open ? 'OPEN' : 'CLOSED', true, 1)
+        c.publish("garage/door/#{DOOR_NAME_LOOKUPS[door_name]}", is_open ? 'OPEN' : 'CLOSED', true, 1)
       end
     rescue => e
       Rails.logger.warn("Attempt to update Automation failed: [#{e}]")
