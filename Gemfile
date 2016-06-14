@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.10'
+gem 'rails', '4.1.15'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'mysql2', '~> 0.3.16'
@@ -14,6 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'faraday', '~> 0.9.0'
 gem 'faraday_middleware', '~> 0.9.1'
+gem 'mqtt', '~> 0.3.1'
 gem 'jbuilder'
 gem 'oj', '~> 2.11.1'
 gem 'oj_mimic_json', '~> 1.0.1'
@@ -24,9 +25,6 @@ gem 'therubyracer',  platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
-gem 'capistrano-rvm', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

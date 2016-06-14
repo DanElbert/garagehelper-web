@@ -8,18 +8,31 @@ class AutomationApi
 
   def self.set_door_state(door_name, is_open)
     raise "Invalid door: [#{door_name}]" unless DOOR_NAME_LOOKUPS.has_key? door_name
-    res = connection.put("/rest/items/#{DOOR_NAME_LOOKUPS[door_name]}/state", is_open ? 'OPEN' : 'CLOSED')
-    unless res.success?
-      Rails.logger.warn("Attempt to update Automation failed: HTTP Status [#{res.status}]")
+
+    begin
+      MQTT::Client.connect("mqtts://#{ENV['MQTT_USER']}:#{ENV['MQTT_PASSWORD']}@mqtt.elbert.us") do |c|
+        c.publish("garage/door/#{DOOR_NAME_LOOKUPS[door_name]}}", is_open ? 'OPEN' : 'CLOSED', true, 1)
+      end
+    rescue => e
+      Rails.logger.warn("Attempt to update Automation failed: [#{e}]")
+      false
     end
-    res.success?
   end
 
-  def self.connection
-    Faraday.new('https://automation.elbert.us/', ssl: { verify: false }) do |faraday|
-      faraday.basic_auth('garage', ENV['OPENHAB_PASSWORD'])
-      faraday.headers["Content-Type"] = "text/plain"
-      faraday.adapter Faraday.default_adapter
-    end
-  end
+  # def self.set_door_state(door_name, is_open)
+  #   raise "Invalid door: [#{door_name}]" unless DOOR_NAME_LOOKUPS.has_key? door_name
+  #   res = connection.put("/rest/items/#{DOOR_NAME_LOOKUPS[door_name]}/state", is_open ? 'OPEN' : 'CLOSED')
+  #   unless res.success?
+  #     Rails.logger.warn("Attempt to update Automation failed: HTTP Status [#{res.status}]")
+  #   end
+  #   res.success?
+  # end
+  #
+  # def self.connection
+  #   Faraday.new('https://automation.elbert.us/', ssl: { verify: false }) do |faraday|
+  #     faraday.basic_auth('garage', ENV['OPENHAB_PASSWORD'])
+  #     faraday.headers["Content-Type"] = "text/plain"
+  #     faraday.adapter Faraday.default_adapter
+  #   end
+  # end
 end
